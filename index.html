@@ -3,17 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SKRMG Command Center | The Future of Utility</title>
+    <title>SKRMG | Command Center</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-black: #020202;
-            --accent-blue: #007bff;
-            --vexilla-glow: rgba(0, 123, 255, 0.6);
-            --scribe-glow: rgba(255, 69, 0, 0.6);
-            --autopilot-glow: rgba(50, 205, 50, 0.6);
-            --prompt-glow: rgba(138, 43, 226, 0.6);
-            --glass: rgba(255, 255, 255, 0.03);
+            --bg-black: #010101;
+            --vexilla-glow: rgba(0, 123, 255, 0.8);   /* Blue */
+            --scribe-glow: rgba(255, 69, 0, 0.8);    /* Orange */
+            --autopilot-glow: rgba(50, 205, 50, 0.8); /* Green */
+            --prompt-glow: rgba(138, 43, 226, 0.8);  /* Purple */
+            --skrmg-glow: rgba(255, 255, 255, 0.3);
             --glass-border: rgba(255, 255, 255, 0.1);
         }
 
@@ -28,136 +27,133 @@
             cursor: crosshair;
         }
 
-        /* NEURAL BACKGROUND */
-        #canvas-bg {
-            position: fixed;
-            top: 0; left: 0; z-index: 0;
-            opacity: 0.4;
-        }
-
-        /* HIGH-END HEADER */
+        /* HEADER NAVIGATION */
         header {
             position: fixed;
             top: 0; width: 100%;
-            padding: 25px 50px;
+            padding: 30px 60px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             z-index: 100;
-            backdrop-filter: blur(15px);
+            backdrop-filter: blur(25px);
             border-bottom: 1px solid var(--glass-border);
-            background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
+            background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
         }
 
-        .brand-box { display: flex; align-items: center; gap: 15px; }
-        .brand-logo-small { width: 35px; height: 35px; }
-        .brand-name { font-weight: 900; letter-spacing: 4px; font-size: 0.9rem; }
+        .brand-box { display: flex; align-items: center; gap: 20px; }
+        .brand-logo-small { width: 45px; height: auto; filter: drop-shadow(0 0 5px white); }
+        .brand-name { font-weight: 900; letter-spacing: 5px; font-size: 0.85rem; }
 
-        .nav-links { display: flex; gap: 30px; }
+        .nav-links { display: flex; gap: 35px; }
         .nav-links a { 
-            text-decoration: none; color: #888; font-size: 0.7rem; 
-            font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
-            transition: 0.3s;
+            text-decoration: none; color: #666; font-size: 0.65rem; 
+            font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
+            transition: 0.4s ease;
         }
-        .nav-links a:hover { color: #fff; text-shadow: 0 0 10px #fff; }
+        .nav-links a:hover { color: #fff; text-shadow: 0 0 15px #fff; }
 
         /* HUD ELEMENTS */
-        .hud-corner {
+        .hud-status {
             position: fixed;
-            bottom: 30px; left: 40px;
+            bottom: 40px; left: 40px;
             font-size: 0.6rem; color: #444;
-            letter-spacing: 2px; line-height: 2;
+            letter-spacing: 3px; line-height: 2.2;
             z-index: 10;
+            font-family: monospace;
         }
 
-        /* THE CORE ECOSYSTEM */
+        /* STAGE & ORBIT */
         .stage {
-            position: relative;
             width: 100vw; height: 100vh;
             display: flex; justify-content: center; align-items: center;
-            perspective: 1000px;
-            z-index: 5;
+            perspective: 1500px;
+            background: radial-gradient(circle at center, #0a0a0a 0%, #010101 100%);
         }
 
         .orbit-wrap {
             position: relative;
-            width: 500px; height: 500px;
+            width: 600px; height: 600px;
             display: flex; justify-content: center; align-items: center;
+            transform-style: preserve-3d;
+            transition: transform 0.1s ease-out;
         }
 
-        /* CENTRAL HEARTBEAT */
+        /* CENTER HUB: SKRMG */
         .center-node {
             position: relative;
             width: 220px; height: 220px;
-            z-index: 20;
-            cursor: pointer;
-            animation: heartbeat 4s infinite ease-in-out;
-            transition: 0.5s;
+            z-index: 50;
+            transition: 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: pulse 6s infinite ease-in-out;
         }
         .center-node img { width: 100%; height: 100%; object-fit: contain; }
-        .center-node:hover { transform: scale(1.05); filter: brightness(1.3); }
 
-        @keyframes heartbeat {
+        @keyframes pulse {
             0%, 100% { transform: scale(1); filter: drop-shadow(0 0 20px rgba(255,255,255,0.1)); }
-            50% { transform: scale(1.03); filter: drop-shadow(0 0 40px rgba(255,255,255,0.3)); }
+            50% { transform: scale(1.04); filter: drop-shadow(0 0 45px rgba(255,255,255,0.4)); }
         }
 
-        /* ORBITING APPS */
+        /* ORBITING NODES */
         .app-node {
             position: absolute;
-            width: 110px; height: 110px;
+            width: 130px; height: 130px;
             display: flex; flex-direction: column; align-items: center;
             text-decoration: none;
-            transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
         .app-node img { 
-            width: 85px; height: 85px; 
+            width: 95px; height: 95px; 
             object-fit: contain; 
-            filter: grayscale(0.5); 
-            transition: 0.5s;
+            filter: grayscale(1) opacity(0.4) brightness(0.8); 
+            transition: 0.5s ease;
         }
 
         .app-node span {
-            margin-top: 15px; font-size: 0.65rem; color: #666;
-            letter-spacing: 3px; text-transform: uppercase;
-            font-weight: 800; opacity: 0; transition: 0.4s;
+            margin-top: 15px; font-size: 0.6rem; color: #555;
+            letter-spacing: 4px; text-transform: uppercase;
+            font-weight: 900; opacity: 0; transition: 0.4s;
         }
 
-        .app-node:hover img { filter: grayscale(0) brightness(1.2); }
-        .app-node:hover span { opacity: 1; color: #fff; }
+        .app-node:hover img { filter: grayscale(0) opacity(1) brightness(1.2); }
+        .app-node:hover span { opacity: 1; color: #fff; text-shadow: 0 0 10px rgba(255,255,255,0.5); }
 
-        /* POSITIONING & CUSTOM GLOWS */
-        .vexilla { transform: translateY(-260px); }
-        .vexilla:hover img { filter: drop-shadow(0 0 35px var(--vexilla-glow)); }
+        /* POSITIONING & GLOWS */
+        /* Top: Vexilla AITS */
+        .vexilla { transform: translateY(-280px); }
+        .vexilla:hover img { filter: drop-shadow(0 0 50px var(--vexilla-glow)) grayscale(0) opacity(1) !important; transform: scale(1.2) translateZ(50px); }
 
-        .autopilot { transform: translateX(260px); }
-        .autopilot:hover img { filter: drop-shadow(0 0 35px var(--autopilot-glow)); }
+        /* Right: Autopilot UI */
+        .autopilot { transform: translateX(280px); }
+        .autopilot:hover img { filter: drop-shadow(0 0 50px var(--autopilot-glow)) grayscale(0) opacity(1) !important; transform: scale(1.2) translateZ(50px); }
 
-        .scribeboard { transform: translateY(260px); }
-        .scribeboard:hover img { filter: drop-shadow(0 0 35px var(--scribe-glow)); }
+        /* Bottom: ScribeBoard */
+        .scribeboard { transform: translateY(280px); }
+        .scribeboard:hover img { filter: drop-shadow(0 0 50px var(--scribe-glow)) grayscale(0) opacity(1) !important; transform: scale(1.2) translateZ(50px); }
 
-        .promptmask { transform: translateX(-260px); }
-        .promptmask:hover img { filter: drop-shadow(0 0 35px var(--prompt-glow)); }
+        /* Left: Prompt Mask */
+        .promptmask { transform: translateX(-280px); }
+        .promptmask:hover img { filter: drop-shadow(0 0 50px var(--prompt-glow)) grayscale(0) opacity(1) !important; transform: scale(1.2) translateZ(50px); }
 
-        /* CALL TO ACTION */
-        .invest-cta {
-            position: absolute;
-            bottom: 10%;
-            left: 50%;
-            transform: translateX(-50%);
-            padding: 15px 40px;
+        /* INVESTOR FOOTER */
+        .invest-btn {
+            position: fixed;
+            bottom: 40px; right: 40px;
+            padding: 18px 45px;
             background: #fff;
             color: #000;
             text-decoration: none;
             font-weight: 900;
-            letter-spacing: 4px;
-            font-size: 0.8rem;
+            letter-spacing: 5px;
+            font-size: 0.7rem;
             text-transform: uppercase;
-            border-radius: 5px;
+            border-radius: 4px;
             transition: 0.4s;
+            z-index: 100;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
-        .invest-cta:hover { background: var(--accent-blue); color: #fff; box-shadow: 0 0 30px var(--accent-blue); }
+        .invest-btn:hover { background: var(--vexilla-glow); color: #fff; box-shadow: 0 0 50px var(--vexilla-glow); transform: translateY(-5px); }
 
     </style>
 </head>
@@ -165,23 +161,22 @@
 
     <header>
         <div class="brand-box">
-            <img src="SKRMG.png" class="brand-logo-small" alt="SKRMG">
-            <div class="brand-name">COMMAND CENTER</div>
+            <img src="SKRMG.png" class="brand-logo-small" alt="SKRMG Center">
+            <div class="brand-name">SKRMG COMMAND</div>
         </div>
         <nav class="nav-links">
             <a href="https://vexillaaits.com">Vexilla</a>
             <a href="#">Autopilot UI</a>
             <a href="#">ScribeBoard</a>
-            <a href="#">PromptMask</a>
+            <a href="#">Prompt Mask</a>
         </nav>
-        <div class="brand-name" style="font-size: 0.6rem; color: #444;">V.1.0_PROTOTYPE</div>
     </header>
 
-    <div class="hud-corner">
-        CORE_STATUS: OPERATIONAL<br>
-        NODES_ACTIVE: 04<br>
-        ENCRYPTION: AES-256<br>
-        ECOSYSTEM: SKRMG_UTILITY_SUITE
+    <div class="hud-status">
+        SYSTEM: SOLOMON_KIN_ORCHESTRATOR<br>
+        STATUS: ONLINE<br>
+        NODES_DETECTED: 04<br>
+        ENCRYPTION: ACTIVE
     </div>
 
     <main class="stage">
@@ -191,7 +186,7 @@
             </div>
 
             <a href="https://vexillaaits.com" class="app-node vexilla">
-                <img src="vexilla Logo.png" alt="Vexilla">
+                <img src="logo-black.png.png" alt="Vexilla AITS">
                 <span>Vexilla AITS</span>
             </a>
 
@@ -206,23 +201,30 @@
             </a>
 
             <a href="#" class="app-node promptmask">
-                <img src="PROMPTMASK LOGO.png" alt="PromptMask">
-                <span>PromptMask</span>
+                <img src="PROMPTMASK LOGO.png" alt="Prompt Mask">
+                <span>Prompt Mask</span>
             </a>
         </div>
     </main>
 
-    <a href="mailto:invest@vexillaaits.com" class="invest-cta">Pitch Deck Access</a>
+    <a href="mailto:invest@vexillaaits.com" class="invest-btn">Secure Investment Portal</a>
 
     <script>
-        // MOUSE PARALLAX EFFECT FOR INVESTOR ENGAGEMENT
-        const stage = document.querySelector('.stage');
+        // IMMERSIVE KINETIC PARALLAX ENGINE
         const orbit = document.getElementById('orbit');
+        document.addEventListener('mousemove', (e) => {
+            let xAxis = (window.innerWidth / 2 - e.pageX) / 35;
+            let yAxis = (window.innerHeight / 2 - e.pageY) / 35;
+            orbit.style.transform = `rotateY(${xAxis}deg) rotateX(${-yAxis}deg)`;
+        });
 
-        stage.addEventListener('mousemove', (e) => {
-            const x = (window.innerWidth / 2 - e.pageX) / 25;
-            const y = (window.innerHeight / 2 - e.pageY) / 25;
-            orbit.style.transform = `rotateY(${x}deg) rotateX(${-y}deg)`;
+        // SAFETY FOR MOBILE - REDUCE SENSITIVITY
+        window.addEventListener('deviceorientation', (e) => {
+            if(window.innerWidth < 768) {
+                let x = e.beta / 4;
+                let y = e.gamma / 4;
+                orbit.style.transform = `rotateY(${y}deg) rotateX(${x}deg)`;
+            }
         });
     </script>
 </body>
