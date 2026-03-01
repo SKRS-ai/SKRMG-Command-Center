@@ -8,11 +8,12 @@
     <style>
         :root {
             --bg-black: #010101;
-            --vexilla-glow: rgba(0, 123, 255, 0.8);   /* Blue */
-            --scribe-glow: rgba(255, 69, 0, 0.8);    /* Orange */
-            --autopilot-glow: rgba(50, 205, 50, 0.8); /* Green */
-            --prompt-glow: rgba(138, 43, 226, 0.8);  /* Purple */
-            --skrmg-glow: rgba(255, 255, 255, 0.3);
+            /* CRANKED UP GLOW INTENSITY */
+            --vexilla-glow: rgba(0, 123, 255, 0.9);   
+            --scribe-glow: rgba(255, 69, 0, 0.9);    
+            --autopilot-glow: rgba(50, 205, 50, 0.9); 
+            --prompt-glow: rgba(138, 43, 226, 0.9);  
+            --skrmg-glow: rgba(255, 255, 255, 0.5);
             --glass-border: rgba(255, 255, 255, 0.1);
         }
 
@@ -27,7 +28,6 @@
             cursor: crosshair;
         }
 
-        /* HEADER NAVIGATION */
         header {
             position: fixed;
             top: 0; width: 100%;
@@ -42,28 +42,28 @@
         }
 
         .brand-box { display: flex; align-items: center; gap: 20px; }
-        .brand-logo-small { width: 45px; height: auto; filter: drop-shadow(0 0 5px white); }
-        .brand-name { font-weight: 900; letter-spacing: 5px; font-size: 0.85rem; }
+        
+        /* INCREASED HEADER LOGO SIZE */
+        .brand-logo-small { width: 70px; height: auto; filter: drop-shadow(0 0 8px white); }
+        .brand-name { font-weight: 900; letter-spacing: 5px; font-size: 0.9rem; }
 
         .nav-links { display: flex; gap: 35px; }
         .nav-links a { 
-            text-decoration: none; color: #666; font-size: 0.65rem; 
+            text-decoration: none; color: #666; font-size: 0.75rem; 
             font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
             transition: 0.4s ease;
         }
         .nav-links a:hover { color: #fff; text-shadow: 0 0 15px #fff; }
 
-        /* HUD ELEMENTS */
         .hud-status {
             position: fixed;
             bottom: 40px; left: 40px;
-            font-size: 0.6rem; color: #444;
+            font-size: 0.7rem; color: #444;
             letter-spacing: 3px; line-height: 2.2;
             z-index: 10;
             font-family: monospace;
         }
 
-        /* STAGE & ORBIT */
         .stage {
             width: 100vw; height: 100vh;
             display: flex; justify-content: center; align-items: center;
@@ -73,16 +73,16 @@
 
         .orbit-wrap {
             position: relative;
-            width: 600px; height: 600px;
+            width: 750px; height: 750px;
             display: flex; justify-content: center; align-items: center;
             transform-style: preserve-3d;
             transition: transform 0.1s ease-out;
         }
 
-        /* CENTER HUB: SKRMG */
+        /* INCREASED CENTER HUB SIZE */
         .center-node {
             position: relative;
-            width: 220px; height: 220px;
+            width: 320px; height: 320px;
             z-index: 50;
             transition: 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             animation: pulse 6s infinite ease-in-out;
@@ -90,70 +90,66 @@
         .center-node img { width: 100%; height: 100%; object-fit: contain; }
 
         @keyframes pulse {
-            0%, 100% { transform: scale(1); filter: drop-shadow(0 0 20px rgba(255,255,255,0.1)); }
-            50% { transform: scale(1.04); filter: drop-shadow(0 0 45px rgba(255,255,255,0.4)); }
+            0%, 100% { transform: scale(1); filter: drop-shadow(0 0 30px rgba(255,255,255,0.2)); }
+            50% { transform: scale(1.06); filter: drop-shadow(0 0 60px rgba(255,255,255,0.5)); }
         }
 
-        /* ORBITING NODES */
+        /* INCREASED ORBITING LOGO SIZES */
         .app-node {
             position: absolute;
-            width: 130px; height: 130px;
+            width: 200px; height: 200px;
             display: flex; flex-direction: column; align-items: center;
+            justify-content: center;
             text-decoration: none;
             transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
         .app-node img { 
-            width: 95px; height: 95px; 
+            width: 160px; height: 160px; 
             object-fit: contain; 
-            filter: grayscale(1) opacity(0.4) brightness(0.8); 
+            filter: grayscale(1) opacity(0.5) brightness(0.8); 
             transition: 0.5s ease;
         }
 
         .app-node span {
-            margin-top: 15px; font-size: 0.6rem; color: #555;
-            letter-spacing: 4px; text-transform: uppercase;
+            margin-top: 15px; font-size: 0.75rem; color: #555;
+            letter-spacing: 5px; text-transform: uppercase;
             font-weight: 900; opacity: 0; transition: 0.4s;
         }
 
-        .app-node:hover img { filter: grayscale(0) opacity(1) brightness(1.2); }
-        .app-node:hover span { opacity: 1; color: #fff; text-shadow: 0 0 10px rgba(255,255,255,0.5); }
+        .app-node:hover img { filter: grayscale(0) opacity(1) brightness(1.3); }
+        .app-node:hover span { opacity: 1; color: #fff; text-shadow: 0 0 15px rgba(255,255,255,0.7); }
 
-        /* POSITIONING & GLOWS */
-        /* Top: Vexilla AITS */
-        .vexilla { transform: translateY(-280px); }
-        .vexilla:hover img { filter: drop-shadow(0 0 50px var(--vexilla-glow)) grayscale(0) opacity(1) !important; transform: scale(1.2) translateZ(50px); }
+        /* INCREASED RADIAL DISTANCE FOR LARGER LOGOS */
+        .vexilla { transform: translateY(-340px); }
+        .vexilla:hover img { filter: drop-shadow(0 0 60px var(--vexilla-glow)) !important; transform: scale(1.2) translateZ(80px); }
 
-        /* Right: Autopilot UI */
-        .autopilot { transform: translateX(280px); }
-        .autopilot:hover img { filter: drop-shadow(0 0 50px var(--autopilot-glow)) grayscale(0) opacity(1) !important; transform: scale(1.2) translateZ(50px); }
+        .autopilot { transform: translateX(340px); }
+        .autopilot:hover img { filter: drop-shadow(0 0 60px var(--autopilot-glow)) !important; transform: scale(1.2) translateZ(80px); }
 
-        /* Bottom: ScribeBoard */
-        .scribeboard { transform: translateY(280px); }
-        .scribeboard:hover img { filter: drop-shadow(0 0 50px var(--scribe-glow)) grayscale(0) opacity(1) !important; transform: scale(1.2) translateZ(50px); }
+        .scribeboard { transform: translateY(340px); }
+        .scribeboard:hover img { filter: drop-shadow(0 0 60px var(--scribe-glow)) !important; transform: scale(1.2) translateZ(80px); }
 
-        /* Left: Prompt Mask */
-        .promptmask { transform: translateX(-280px); }
-        .promptmask:hover img { filter: drop-shadow(0 0 50px var(--prompt-glow)) grayscale(0) opacity(1) !important; transform: scale(1.2) translateZ(50px); }
+        .promptmask { transform: translateX(-340px); }
+        .promptmask:hover img { filter: drop-shadow(0 0 60px var(--prompt-glow)) !important; transform: scale(1.2) translateZ(80px); }
 
-        /* INVESTOR FOOTER */
         .invest-btn {
             position: fixed;
             bottom: 40px; right: 40px;
-            padding: 18px 45px;
+            padding: 22px 55px;
             background: #fff;
             color: #000;
             text-decoration: none;
             font-weight: 900;
             letter-spacing: 5px;
-            font-size: 0.7rem;
+            font-size: 0.8rem;
             text-transform: uppercase;
             border-radius: 4px;
             transition: 0.4s;
             z-index: 100;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.6);
         }
-        .invest-btn:hover { background: var(--vexilla-glow); color: #fff; box-shadow: 0 0 50px var(--vexilla-glow); transform: translateY(-5px); }
+        .invest-btn:hover { background: var(--vexilla-glow); color: #fff; box-shadow: 0 0 60px var(--vexilla-glow); transform: translateY(-5px); }
 
     </style>
 </head>
@@ -176,7 +172,7 @@
         SYSTEM: SOLOMON_KIN_ORCHESTRATOR<br>
         STATUS: ONLINE<br>
         NODES_DETECTED: 04<br>
-        ENCRYPTION: ACTIVE
+        VISUAL_SCALE: MAX
     </div>
 
     <main class="stage">
@@ -210,19 +206,17 @@
     <a href="mailto:invest@vexillaaits.com" class="invest-btn">Secure Investment Portal</a>
 
     <script>
-        // IMMERSIVE KINETIC PARALLAX ENGINE
         const orbit = document.getElementById('orbit');
         document.addEventListener('mousemove', (e) => {
-            let xAxis = (window.innerWidth / 2 - e.pageX) / 35;
-            let yAxis = (window.innerHeight / 2 - e.pageY) / 35;
+            let xAxis = (window.innerWidth / 2 - e.pageX) / 40;
+            let yAxis = (window.innerHeight / 2 - e.pageY) / 40;
             orbit.style.transform = `rotateY(${xAxis}deg) rotateX(${-yAxis}deg)`;
         });
 
-        // SAFETY FOR MOBILE - REDUCE SENSITIVITY
         window.addEventListener('deviceorientation', (e) => {
             if(window.innerWidth < 768) {
-                let x = e.beta / 4;
-                let y = e.gamma / 4;
+                let x = e.beta / 5;
+                let y = e.gamma / 5;
                 orbit.style.transform = `rotateY(${y}deg) rotateX(${x}deg)`;
             }
         });
