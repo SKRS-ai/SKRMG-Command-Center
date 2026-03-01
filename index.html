@@ -8,7 +8,6 @@
     <style>
         :root {
             --bg-black: #010101;
-            /* CRANKED UP GLOW INTENSITY */
             --vexilla-glow: rgba(0, 123, 255, 0.9);   
             --scribe-glow: rgba(255, 69, 0, 0.9);    
             --autopilot-glow: rgba(50, 205, 50, 0.9); 
@@ -35,15 +34,13 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            z-index: 100;
+            z-index: 1000; /* Stays above everything */
             backdrop-filter: blur(25px);
             border-bottom: 1px solid var(--glass-border);
-            background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
+            background: linear-gradient(to bottom, rgba(0,0,0,0.95), transparent);
         }
 
         .brand-box { display: flex; align-items: center; gap: 20px; }
-        
-        /* INCREASED HEADER LOGO SIZE */
         .brand-logo-small { width: 70px; height: auto; filter: drop-shadow(0 0 8px white); }
         .brand-name { font-weight: 900; letter-spacing: 5px; font-size: 0.9rem; }
 
@@ -64,11 +61,13 @@
             font-family: monospace;
         }
 
+        /* STAGE ADJUSTMENT: Pushing the orbit down to clear the header */
         .stage {
             width: 100vw; height: 100vh;
             display: flex; justify-content: center; align-items: center;
             perspective: 1500px;
             background: radial-gradient(circle at center, #0a0a0a 0%, #010101 100%);
+            padding-top: 100px; /* Shifts the visual center lower */
         }
 
         .orbit-wrap {
@@ -77,9 +76,9 @@
             display: flex; justify-content: center; align-items: center;
             transform-style: preserve-3d;
             transition: transform 0.1s ease-out;
+            margin-top: 80px; /* Extra clearance for the top logo */
         }
 
-        /* INCREASED CENTER HUB SIZE */
         .center-node {
             position: relative;
             width: 320px; height: 320px;
@@ -94,7 +93,6 @@
             50% { transform: scale(1.06); filter: drop-shadow(0 0 60px rgba(255,255,255,0.5)); }
         }
 
-        /* INCREASED ORBITING LOGO SIZES */
         .app-node {
             position: absolute;
             width: 200px; height: 200px;
@@ -120,7 +118,7 @@
         .app-node:hover img { filter: grayscale(0) opacity(1) brightness(1.3); }
         .app-node:hover span { opacity: 1; color: #fff; text-shadow: 0 0 15px rgba(255,255,255,0.7); }
 
-        /* INCREASED RADIAL DISTANCE FOR LARGER LOGOS */
+        /* CIRCLE PLACEMENT */
         .vexilla { transform: translateY(-340px); }
         .vexilla:hover img { filter: drop-shadow(0 0 60px var(--vexilla-glow)) !important; transform: scale(1.2) translateZ(80px); }
 
@@ -157,14 +155,16 @@
 
     <header>
         <div class="brand-box">
-            <img src="SKRMG.png" class="brand-logo-small" alt="SKRMG Center">
-            <div class="brand-name">SKRMG COMMAND</div>
+            <a href="https://skrs-ai.github.io/LicensingCatalog/" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 20px;">
+                <img src="SKRMG.png" class="brand-logo-small" alt="SKRMG Center">
+                <div class="brand-name">SKRMG COMMAND</div>
+            </a>
         </div>
         <nav class="nav-links">
-            <a href="https://vexillaaits.com">Vexilla</a>
-            <a href="#">Autopilot UI</a>
-            <a href="#">ScribeBoard</a>
-            <a href="#">Prompt Mask</a>
+            <a href="https://nehemiahbrown007.github.io/vexilla-support/index">Vexilla</a>
+            <a href="https://skrs-ai.github.io/Vexilla-AutoPilot-UI/#investors">Autopilot UI</a>
+            <a href="https://skrs-ai.github.io/Vexilla--Scribeboard/#invest">ScribeBoard</a>
+            <a href="https://skrs-ai.github.io/Vexilla-Prompt-MasK/#deploy">Prompt Mask</a>
         </nav>
     </header>
 
@@ -172,33 +172,34 @@
         SYSTEM: SOLOMON_KIN_ORCHESTRATOR<br>
         STATUS: ONLINE<br>
         NODES_DETECTED: 04<br>
-        VISUAL_SCALE: MAX
+        VERTICAL_OFFSET: ADJUSTED
     </div>
 
     <main class="stage">
         <div class="orbit-wrap" id="orbit">
-            <div class="center-node">
+            
+            <a href="https://skrs-ai.github.io/LicensingCatalog/" class="center-node">
                 <img src="SKRMG.png" alt="Solomon Kin Records Media Group">
-            </div>
+            </a>
 
-            <a href="https://vexillaaits.com" class="app-node vexilla">
+            <a href="https://nehemiahbrown007.github.io/vexilla-support/index" class="app-node vexilla">
                 <img src="logo-black.png.png" alt="Vexilla AITS">
                 <span>Vexilla AITS</span>
             </a>
 
-            <a href="#" class="app-node autopilot">
+            <a href="https://skrs-ai.github.io/Vexilla-AutoPilot-UI/#investors" class="app-node autopilot">
                 <img src="AutopilotUI.png" alt="Autopilot UI">
-                <span>Autopilot UI</span>
+                <span>AutoPilot-UI</span>
             </a>
 
-            <a href="#" class="app-node scribeboard">
+            <a href="https://skrs-ai.github.io/Vexilla--Scribeboard/#invest" class="app-node scribeboard">
                 <img src="scribeboard.png" alt="ScribeBoard">
-                <span>ScribeBoard</span>
+                <span>Scribeboard</span>
             </a>
 
-            <a href="#" class="app-node promptmask">
+            <a href="https://skrs-ai.github.io/Vexilla-Prompt-MasK/#deploy" class="app-node promptmask">
                 <img src="PROMPTMASK LOGO.png" alt="Prompt Mask">
-                <span>Prompt Mask</span>
+                <span>Prompt-MasK</span>
             </a>
         </div>
     </main>
