@@ -30,58 +30,50 @@
         header {
             position: fixed;
             top: 0; width: 100%;
-            padding: 30px 60px;
+            padding: 20px 60px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            z-index: 1000; /* Stays above everything */
+            z-index: 1000;
             backdrop-filter: blur(25px);
             border-bottom: 1px solid var(--glass-border);
-            background: linear-gradient(to bottom, rgba(0,0,0,0.95), transparent);
+            background: rgba(0,0,0,0.8);
         }
 
-        .brand-box { display: flex; align-items: center; gap: 20px; }
-        .brand-logo-small { width: 70px; height: auto; filter: drop-shadow(0 0 8px white); }
-        .brand-name { font-weight: 900; letter-spacing: 5px; font-size: 0.9rem; }
+        .brand-box { display: flex; align-items: center; }
+        
+        /* HEADER LOGO TRIPLED (210px) */
+        .brand-logo-small { width: 210px; height: auto; filter: drop-shadow(0 0 15px white); transition: 0.3s; }
+        .brand-logo-small:hover { transform: scale(1.02); }
 
         .nav-links { display: flex; gap: 35px; }
         .nav-links a { 
-            text-decoration: none; color: #666; font-size: 0.75rem; 
+            text-decoration: none; color: #888; font-size: 0.8rem; 
             font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
             transition: 0.4s ease;
         }
         .nav-links a:hover { color: #fff; text-shadow: 0 0 15px #fff; }
 
-        .hud-status {
-            position: fixed;
-            bottom: 40px; left: 40px;
-            font-size: 0.7rem; color: #444;
-            letter-spacing: 3px; line-height: 2.2;
-            z-index: 10;
-            font-family: monospace;
-        }
-
-        /* STAGE ADJUSTMENT: Pushing the orbit down to clear the header */
+        /* STAGE: Adjusted centering to clear high header */
         .stage {
             width: 100vw; height: 100vh;
             display: flex; justify-content: center; align-items: center;
             perspective: 1500px;
             background: radial-gradient(circle at center, #0a0a0a 0%, #010101 100%);
-            padding-top: 100px; /* Shifts the visual center lower */
+            padding-top: 120px; /* Moves the whole cluster down */
         }
 
         .orbit-wrap {
             position: relative;
-            width: 750px; height: 750px;
+            width: 500px; height: 500px;
             display: flex; justify-content: center; align-items: center;
             transform-style: preserve-3d;
-            transition: transform 0.1s ease-out;
-            margin-top: 80px; /* Extra clearance for the top logo */
         }
 
+        /* CENTER HUB */
         .center-node {
             position: relative;
-            width: 320px; height: 320px;
+            width: 280px; height: 280px;
             z-index: 50;
             transition: 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             animation: pulse 6s infinite ease-in-out;
@@ -90,12 +82,13 @@
 
         @keyframes pulse {
             0%, 100% { transform: scale(1); filter: drop-shadow(0 0 30px rgba(255,255,255,0.2)); }
-            50% { transform: scale(1.06); filter: drop-shadow(0 0 60px rgba(255,255,255,0.5)); }
+            50% { transform: scale(1.04); filter: drop-shadow(0 0 50px rgba(255,255,255,0.4)); }
         }
 
+        /* SATELLITE NODES */
         .app-node {
             position: absolute;
-            width: 200px; height: 200px;
+            width: 160px; height: 160px;
             display: flex; flex-direction: column; align-items: center;
             justify-content: center;
             text-decoration: none;
@@ -103,51 +96,49 @@
         }
 
         .app-node img { 
-            width: 160px; height: 160px; 
+            width: 130px; height: 130px; 
             object-fit: contain; 
-            filter: grayscale(1) opacity(0.5) brightness(0.8); 
+            filter: grayscale(1) opacity(0.6) brightness(0.8); 
             transition: 0.5s ease;
         }
 
         .app-node span {
-            margin-top: 15px; font-size: 0.75rem; color: #555;
-            letter-spacing: 5px; text-transform: uppercase;
+            margin-top: 10px; font-size: 0.7rem; color: #555;
+            letter-spacing: 4px; text-transform: uppercase;
             font-weight: 900; opacity: 0; transition: 0.4s;
         }
 
         .app-node:hover img { filter: grayscale(0) opacity(1) brightness(1.3); }
         .app-node:hover span { opacity: 1; color: #fff; text-shadow: 0 0 15px rgba(255,255,255,0.7); }
 
-        /* CIRCLE PLACEMENT */
-        .vexilla { transform: translateY(-340px); }
-        .vexilla:hover img { filter: drop-shadow(0 0 60px var(--vexilla-glow)) !important; transform: scale(1.2) translateZ(80px); }
+        /* TIGHT ORBIT PLACEMENT (Reduced distance to 210px) */
+        .vexilla { transform: translateY(-210px); }
+        .vexilla:hover img { filter: drop-shadow(0 0 60px var(--vexilla-glow)) !important; transform: scale(1.15) translateZ(50px); }
 
-        .autopilot { transform: translateX(340px); }
-        .autopilot:hover img { filter: drop-shadow(0 0 60px var(--autopilot-glow)) !important; transform: scale(1.2) translateZ(80px); }
+        .autopilot { transform: translateX(210px); }
+        .autopilot:hover img { filter: drop-shadow(0 0 60px var(--autopilot-glow)) !important; transform: scale(1.15) translateZ(50px); }
 
-        .scribeboard { transform: translateY(340px); }
-        .scribeboard:hover img { filter: drop-shadow(0 0 60px var(--scribe-glow)) !important; transform: scale(1.2) translateZ(80px); }
+        .scribeboard { transform: translateY(210px); }
+        .scribeboard:hover img { filter: drop-shadow(0 0 60px var(--scribe-glow)) !important; transform: scale(1.15) translateZ(50px); }
 
-        .promptmask { transform: translateX(-340px); }
-        .promptmask:hover img { filter: drop-shadow(0 0 60px var(--prompt-glow)) !important; transform: scale(1.2) translateZ(80px); }
+        .promptmask { transform: translateX(-210px); }
+        .promptmask:hover img { filter: drop-shadow(0 0 60px var(--prompt-glow)) !important; transform: scale(1.15) translateZ(50px); }
 
         .invest-btn {
             position: fixed;
-            bottom: 40px; right: 40px;
-            padding: 22px 55px;
+            bottom: 30px; right: 30px;
+            padding: 18px 40px;
             background: #fff;
             color: #000;
             text-decoration: none;
             font-weight: 900;
-            letter-spacing: 5px;
-            font-size: 0.8rem;
+            letter-spacing: 4px;
+            font-size: 0.75rem;
             text-transform: uppercase;
             border-radius: 4px;
-            transition: 0.4s;
             z-index: 100;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.6);
         }
-        .invest-btn:hover { background: var(--vexilla-glow); color: #fff; box-shadow: 0 0 60px var(--vexilla-glow); transform: translateY(-5px); }
+        .invest-btn:hover { background: var(--vexilla-glow); color: #fff; box-shadow: 0 0 40px var(--vexilla-glow); }
 
     </style>
 </head>
@@ -155,9 +146,8 @@
 
     <header>
         <div class="brand-box">
-            <a href="https://skrs-ai.github.io/LicensingCatalog/" style="text-decoration: none; color: inherit; display: flex; align-items: center; gap: 20px;">
-                <img src="SKRMG.png" class="brand-logo-small" alt="SKRMG Center">
-                <div class="brand-name">SKRMG COMMAND</div>
+            <a href="https://skrs-ai.github.io/LicensingCatalog/" style="text-decoration: none; display: flex; align-items: center;">
+                <img src="SKRMG.png" class="brand-logo-small" alt="Solomon Kin Records | Studio & Production Portal">
             </a>
         </div>
         <nav class="nav-links">
@@ -167,13 +157,6 @@
             <a href="https://skrs-ai.github.io/Vexilla-Prompt-MasK/#deploy">Prompt Mask</a>
         </nav>
     </header>
-
-    <div class="hud-status">
-        SYSTEM: SOLOMON_KIN_ORCHESTRATOR<br>
-        STATUS: ONLINE<br>
-        NODES_DETECTED: 04<br>
-        VERTICAL_OFFSET: ADJUSTED
-    </div>
 
     <main class="stage">
         <div class="orbit-wrap" id="orbit">
@@ -204,22 +187,14 @@
         </div>
     </main>
 
-    <a href="mailto:invest@vexillaaits.com" class="invest-btn">Secure Investment Portal</a>
+    <a href="mailto:invest@vexillaaits.com" class="invest-btn">Secure Access</a>
 
     <script>
         const orbit = document.getElementById('orbit');
         document.addEventListener('mousemove', (e) => {
-            let xAxis = (window.innerWidth / 2 - e.pageX) / 40;
-            let yAxis = (window.innerHeight / 2 - e.pageY) / 40;
+            let xAxis = (window.innerWidth / 2 - e.pageX) / 45;
+            let yAxis = (window.innerHeight / 2 - e.pageY) / 45;
             orbit.style.transform = `rotateY(${xAxis}deg) rotateX(${-yAxis}deg)`;
-        });
-
-        window.addEventListener('deviceorientation', (e) => {
-            if(window.innerWidth < 768) {
-                let x = e.beta / 5;
-                let y = e.gamma / 5;
-                orbit.style.transform = `rotateY(${y}deg) rotateX(${x}deg)`;
-            }
         });
     </script>
 </body>
