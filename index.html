@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>SKRMG | Command Center - Investor Relations</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;900&display=swap" rel="stylesheet">
     <style>
@@ -41,7 +41,6 @@
         }
 
         .brand-box { display: flex; align-items: center; }
-        /* HEADER LOGO (210px) */
         .brand-logo-small { width: 210px; height: auto; filter: drop-shadow(0 0 15px white); transition: 0.4s; }
         .brand-logo-small:hover { transform: scale(1.05); }
 
@@ -78,7 +77,6 @@
             transform-style: preserve-3d;
         }
 
-        /* CENTER HUB (Increased x1) */
         .center-node {
             position: relative;
             width: 340px; height: 340px;
@@ -93,7 +91,6 @@
             50% { transform: scale(1.05); filter: drop-shadow(0 0 65px rgba(255,255,255,0.5)); }
         }
 
-        /* SATELLITE NODES (Increased x1) */
         .app-node {
             position: absolute;
             width: 180px; height: 180px;
@@ -119,7 +116,7 @@
         .app-node:hover img { filter: grayscale(0) opacity(1) brightness(1.4); }
         .app-node:hover span { opacity: 1; color: #fff; text-shadow: 0 0 15px #fff; }
 
-        /* TIGHT CORE PLACEMENT (220px Radius) */
+        /* DESKTOP PLACEMENT */
         .vexilla { transform: translateY(-220px); }
         .vexilla:hover img { filter: drop-shadow(0 0 70px var(--vexilla-glow)) !important; transform: scale(1.2) translateZ(60px); }
 
@@ -132,7 +129,6 @@
         .promptmask { transform: translateX(-220px); }
         .promptmask:hover img { filter: drop-shadow(0 0 70px var(--prompt-glow)) !important; transform: scale(1.2) translateZ(60px); }
 
-        /* INVESTOR PRIMARY CTA */
         .invest-btn {
             position: fixed;
             bottom: 40px; right: 40px;
@@ -151,6 +147,40 @@
         }
         .invest-btn:hover { background: var(--vexilla-glow); color: #fff; box-shadow: 0 0 50px var(--vexilla-glow); transform: translateY(-5px); }
 
+        /* ------------------------------------------------------------------ */
+        /* MOBILE OPTIMIZATION (ONLY APPLIES ON SMALL SCREENS) */
+        /* ------------------------------------------------------------------ */
+        @media (max-width: 768px) {
+            header { padding: 15px 20px; flex-direction: column; gap: 15px; height: auto; }
+            .brand-logo-small { width: 140px; } /* Shrink header logo for mobile */
+            .nav-links { gap: 15px; }
+            .nav-links a { font-size: 0.6rem; letter-spacing: 2px; }
+
+            .stage { padding-top: 150px; } /* Push down more for the double-stacked mobile header */
+            
+            /* Scale down the entire orbit */
+            .center-node { width: 180px; height: 180px; }
+            .app-node { width: 100px; height: 100px; }
+            .app-node img { width: 80px; height: 80px; }
+            
+            /* Tighter orbit radius for narrow screens (140px instead of 220px) */
+            .vexilla { transform: translateY(-140px); }
+            .autopilot { transform: translateX(140px); }
+            .scribeboard { transform: translateY(140px); }
+            .promptmask { transform: translateX(-140px); }
+
+            .hud-status { display: none; } /* Clean up the screen on small devices */
+            
+            .invest-btn { 
+                bottom: 20px; right: 50%; 
+                transform: translateX(50%); 
+                width: 90%; 
+                padding: 15px 0; 
+                text-align: center;
+                font-size: 0.7rem;
+            }
+            .invest-btn:hover { transform: translateX(50%) translateY(-5px); }
+        }
     </style>
 </head>
 <body>
@@ -158,7 +188,7 @@
     <header>
         <div class="brand-box">
             <a href="https://skrs-ai.github.io/LicensingCatalog/" style="text-decoration: none;">
-                <img src="SKRMG.png" class="brand-logo-small" alt="Solomon Kin Records | Studio & Production Portal">
+                <img src="SKRMG.png" class="brand-logo-small" alt="SKRMG Center">
             </a>
         </div>
         <nav class="nav-links">
@@ -172,19 +202,17 @@
     <div class="hud-status">
         ORCHESTRATOR_ACTIVE: YES<br>
         SECURITY_PROTOCOLS: ENFORCED<br>
-        INVESTOR_ACCESS: PENDING_APPROVAL<br>
-        ECOSYSTEM_NODES: 04_CONNECTED
+        INVESTOR_ACCESS: PENDING_APPROVAL
     </div>
 
     <main class="stage">
         <div class="orbit-wrap" id="orbit">
-            
             <a href="https://skrs-ai.github.io/LicensingCatalog/" class="center-node">
-                <img src="SKRMG.png" alt="Solomon Kin Records Media Group">
+                <img src="SKRMG.png" alt="Solomon Kin Records">
             </a>
 
             <a href="https://nehemiahbrown007.github.io/vexilla-support/index" class="app-node vexilla">
-                <img src="logo-black.png" alt="VexillaAITS">
+                <img src="logo-black.png.png" alt="VexillaAITS">
                 <span>VexillaAITS</span>
             </a>
 
@@ -214,7 +242,15 @@
             let yAxis = (window.innerHeight / 2 - e.pageY) / 50;
             orbit.style.transform = `rotateY(${xAxis}deg) rotateX(${-yAxis}deg)`;
         });
+
+        // Add touch/tilt support for mobile
+        window.addEventListener('deviceorientation', (e) => {
+            if(window.innerWidth < 768) {
+                let x = e.beta / 10;
+                let y = e.gamma / 10;
+                orbit.style.transform = `rotateY(${y}deg) rotateX(${x}deg)`;
+            }
+        });
     </script>
 </body>
 </html>
-
